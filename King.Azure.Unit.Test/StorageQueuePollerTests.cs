@@ -27,7 +27,7 @@
         [Fact]
         public void IsIStorageQueuePoller()
         {
-            //Assert.IsNotNull(new StorageQueuePoller<object>("queue", ConnectionString) as IStorageQueuePoller<object>);
+            //Assert.NotNull(new StorageQueuePoller<object>("queue", ConnectionString) as IStorageQueuePoller<object>);
         }
 
         [Fact]
@@ -49,7 +49,7 @@
         //    var poller = new StorageQueuePoller<object>(queue);
         //    var returned = await poller.Poll();
 
-        //    Assert.IsNotNull(returned);
+        //    Assert.NotNull(returned);
 
         //    await queue.Received().Get();
         //}
@@ -63,7 +63,7 @@
         //    var poller = new StorageQueuePoller<object>(queue);
         //    var returned = await poller.Poll();
 
-        //    Assert.IsNull(returned);
+        //    Assert.Null(returned);
 
         //    await queue.Received().Get();
         //}
@@ -95,7 +95,7 @@
         //    var poller = new StorageQueuePoller<object>(queue);
         //    var returned = await poller.PollMany(3);
 
-        //    Assert.IsNotNull(returned);
+        //    Assert.NotNull(returned);
         //    Assert.AreEqual(3, returned.Count());
 
         //    await queue.Received().GetMany(3);
@@ -110,7 +110,7 @@
         //    var poller = new StorageQueuePoller<object>(queue);
         //    var returned = await poller.PollMany(3);
 
-        //    Assert.IsNull(returned);
+        //    Assert.Null(returned);
 
         //    await queue.Received().GetMany(3);
         //}

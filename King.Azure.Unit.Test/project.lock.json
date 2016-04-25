@@ -5319,7 +5319,9 @@
       "WindowsAzure.Storage >= 7.0.1-preview",
       "xunit >= 2.1.0"
     ],
-    ".NETFramework,Version=v4.5.1": [],
+    ".NETFramework,Version=v4.5.1": [
+      "fx/System.Runtime >= 4.0.10"
+    ],
     ".NETPlatform,Version=v5.4": [
       "Microsoft.CSharp >= 4.0.1-beta-23516",
       "System.Collections >= 4.0.11-beta-23516",

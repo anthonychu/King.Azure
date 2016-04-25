@@ -25,14 +25,14 @@
         }
         #endregion
 
-        [SetUp]
+        //[SetUp]
         public void SetUp()
         {
             var storage = new Container(ContainerName, ConnectionString);
             storage.CreateIfNotExists().Wait();
         }
 
-        [TearDown]
+        //[TearDown]
         public void TearDown()
         {
             var storage = new Container(ContainerName, ConnectionString);
@@ -47,7 +47,7 @@
             var storage = new Container(name, account);
             var created = await storage.CreateIfNotExists();
 
-            //Assert.IsTrue(created);
+            //Assert.True(created);
         }
 
         [Fact]
@@ -57,7 +57,7 @@
             var storage = new Container(name, ConnectionString);
             var created = await storage.CreateIfNotExists();
 
-            //Assert.IsTrue(created);
+            //Assert.True(created);
 
             var blobClient = storage.Account.CreateCloudBlobClient();
             var container = blobClient.GetContainerReference(name);
@@ -72,7 +72,7 @@
             var storage = new Container(name, ConnectionString, true);
             var created = await storage.CreateIfNotExists();
 
-            //Assert.IsTrue(created);
+            //Assert.True(created);
 
             var blobClient = storage.Account.CreateCloudBlobClient();
             var container = blobClient.GetContainerReference(name);
@@ -88,7 +88,7 @@
             await storage.Save(blobName, Guid.NewGuid());
             var exists = await storage.Exists(blobName);
 
-            //Assert.IsTrue(exists);
+            //Assert.True(exists);
         }
 
         [Fact]
@@ -99,7 +99,7 @@
 
             var exists = await storage.Exists(blobName);
 
-            Assert.IsFalse(exists);
+            Assert.False(exists);
         }
 
         [Fact]
@@ -110,8 +110,8 @@
             await storage.Save(name, new Helper());
 
             var block = storage.GetBlockReference(name);
-            Assert.IsNotNull(block);
-            //Assert.IsTrue(block.Exists());
+            Assert.NotNull(block);
+            //Assert.True(block.Exists());
         }
 
         [Fact]
@@ -128,8 +128,8 @@
             await blob.UploadFromByteArrayAsync(bytes, 0, bytes.Length);
 
             var page = storage.GetPageReference(name);
-            Assert.IsNotNull(page);
-            //Assert.IsTrue(page.Exists());
+            Assert.NotNull(page);
+            //Assert.True(page.Exists());
         }
 
         [Fact]
@@ -146,11 +146,11 @@
             await storage.Save(blobName, helper);
             var returned = await storage.Get<Helper>(blobName);
 
-            Assert.IsNotNull(returned);
+            Assert.NotNull(returned);
             //Assert.AreEqual(helper.Id, returned.Id);
 
             var properties = await storage.Properties(blobName);
-            Assert.IsNotNull(properties);
+            Assert.NotNull(properties);
             //Assert.AreEqual("application/json", properties.ContentType);
         }
 
@@ -164,11 +164,11 @@
             await storage.Save(blobName, data);
             var returned = await storage.GetText(blobName);
 
-            Assert.IsNotNull(returned);
+            Assert.NotNull(returned);
             //Assert.AreEqual(data, returned);
 
             var properties = await storage.Properties(blobName);
-            Assert.IsNotNull(properties);
+            Assert.NotNull(properties);
             //Assert.AreEqual("text/plain", properties.ContentType);
         }
 
@@ -186,7 +186,7 @@
             await storage.Save(blobName, helper);
             var returned = await storage.Properties(blobName);
 
-            Assert.IsNotNull(returned);
+            Assert.NotNull(returned);
             //Assert.AreEqual("application/json", returned.ContentType);
         }
 
@@ -203,12 +203,12 @@
             await storage.Save(blobName, bytes);
             var returned = await storage.Get(blobName);
 
-            Assert.IsNotNull(returned);
+            Assert.NotNull(returned);
             //Assert.AreEqual(bytes.Length, returned.Length);
             //Assert.AreEqual(bytes, returned);
 
             var properties = await storage.Properties(blobName);
-            Assert.IsNotNull(properties);
+            Assert.NotNull(properties);
             //Assert.AreEqual("application/octet-stream", properties.ContentType);
         }
 
@@ -227,7 +227,7 @@
             {
                 var stored = returned.ToArray();
 
-                Assert.IsNotNull(stored);
+                Assert.NotNull(stored);
                 //Assert.AreEqual(bytes.Length, stored.Length);
                 //Assert.AreEqual(bytes, stored);
             }
@@ -246,7 +246,7 @@
             await storage.Save(blobName, bytes);
             var returned = await storage.Properties(blobName);
 
-            Assert.IsNotNull(returned);
+            Assert.NotNull(returned);
             //Assert.AreEqual(bytes.Length, returned.Length);
             //Assert.AreEqual("application/octet-stream", returned.ContentType);
         }
@@ -264,7 +264,7 @@
             await storage.Save(blobName, bytes, "application/pdf");
             var returned = await storage.Properties(blobName);
 
-            Assert.IsNotNull(returned);
+            Assert.NotNull(returned);
             //Assert.AreEqual(bytes.Length, returned.Length);
             //Assert.AreEqual("application/pdf", returned.ContentType);
         }
@@ -318,11 +318,11 @@
             await blob.UploadFromByteArrayAsync(bytes, 0, bytes.Length);
 
             var snapshot = await storage.Snapshot(name);
-            //Assert.IsTrue(snapshot.IsSnapshot);
+            //Assert.True(snapshot.IsSnapshot);
 
             var returned = storage.GetPageReference(snapshot.Name, snapshot.SnapshotTime);
-            Assert.IsNotNull(returned);
-            //Assert.IsTrue(returned.IsSnapshot);
+            Assert.NotNull(returned);
+            //Assert.True(returned.IsSnapshot);
         }
 
         [Fact]
@@ -337,11 +337,11 @@
             await storage.Save(name, bytes);
 
             var snapshot = await storage.Snapshot(name);
-            //Assert.IsTrue(snapshot.IsSnapshot);
+            //Assert.True(snapshot.IsSnapshot);
 
             var returned = storage.GetPageReference(snapshot.Name, snapshot.SnapshotTime);
-            Assert.IsNotNull(returned);
-            //Assert.IsTrue(returned.IsSnapshot);
+            Assert.NotNull(returned);
+            //Assert.True(returned.IsSnapshot);
         }
 
         [Fact]
@@ -380,7 +380,7 @@
         {
             var blob = Guid.NewGuid().ToString();
             var storage = new Container(ContainerName, ConnectionString);
-            Assert.IsNull(await storage.Snapshot(blob));
+            Assert.Null(await storage.Snapshot(blob));
         }
 
         [Fact]
@@ -395,7 +395,7 @@
             await storage.SetCacheControl(blobName);
             var returned = await storage.Properties(blobName);
 
-            Assert.IsNotNull(returned);
+            Assert.NotNull(returned);
             //Assert.AreEqual(cache, returned.CacheControl);
             //Assert.AreEqual(contentType, returned.ContentType);
         }
@@ -413,7 +413,7 @@
             await storage.Save(blobName, Guid.NewGuid().ToString(), contentType);
             var returned = await storage.Properties(blobName);
 
-            Assert.IsNotNull(returned);
+            Assert.NotNull(returned);
             //Assert.AreEqual(cache, returned.CacheControl);
             //Assert.AreEqual(contentType, returned.ContentType);
         }
@@ -429,7 +429,7 @@
             await storage.SetCacheControl(blobName);
             var returned = await storage.Properties(blobName);
 
-            Assert.IsNotNull(returned);
+            Assert.NotNull(returned);
             //Assert.AreEqual(cache, returned.CacheControl);
         }
 
@@ -444,7 +444,7 @@
             await storage.SetCacheControl(blobName, 0);
             var returned = await storage.Properties(blobName);
 
-            Assert.IsNotNull(returned);
+            Assert.NotNull(returned);
             //Assert.AreEqual(cache, returned.CacheControl);
         }
 
@@ -459,7 +459,7 @@
             await storage.SetCacheControl(blobName, 1000);
             var returned = await storage.Properties(blobName);
 
-            Assert.IsNotNull(returned);
+            Assert.NotNull(returned);
             //Assert.AreEqual(cache, returned.CacheControl);
         }
 
@@ -477,7 +477,7 @@
 
             var uri = await storage.Copy(from, to);
 
-            Assert.IsNotNull(uri);
+            Assert.NotNull(uri);
 
             var exists = await storage.Exists(to);
             var data = await storage.Get(to);
@@ -505,7 +505,7 @@
 
             var uri = await storage.Copy(from, toContainer, to);
 
-            Assert.IsNotNull(uri);
+            Assert.NotNull(uri);
 
             var exists = await toContainer.Exists(to);
             var data = await toContainer.Get(to);
@@ -534,7 +534,7 @@
 
             var uri = await storage.Copy(from, toContainerName, to);
 
-            Assert.IsNotNull(uri);
+            Assert.NotNull(uri);
 
             var exists = await toContainer.Exists(to);
             var data = await toContainer.Get(to);

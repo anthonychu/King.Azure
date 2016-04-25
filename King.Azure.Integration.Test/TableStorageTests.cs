@@ -8,6 +8,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Xunit;
 
     
     public class TableStorageTests
@@ -48,7 +49,7 @@
             var storage = new TableStorage(name, account);
             var created = await storage.CreateIfNotExists();
 
-            //Assert.IsTrue(created);
+            //Assert.True(created);
         }
 
         [Fact]
@@ -58,7 +59,7 @@
             var storage = new TableStorage(table, ConnectionString);
             var created = await storage.CreateIfNotExists();
 
-            //Assert.IsTrue(created);
+            //Assert.True(created);
 
             await storage.Delete();
         }
@@ -70,9 +71,9 @@
             var storage = new TableStorage(table, ConnectionString);
             var created = await storage.CreateIfNotExists();
 
-            //Assert.IsTrue(created);
+            //Assert.True(created);
             created = await storage.CreateIfNotExists();
-            Assert.IsFalse(created);
+            Assert.False(created);
 
             await storage.Delete();
         }
@@ -84,7 +85,7 @@
             var storage = new TableStorage(table, ConnectionString);
             var created = await storage.Create();
 
-            //Assert.IsTrue(created);
+            //Assert.True(created);
 
             await storage.Delete();
         }
@@ -96,12 +97,12 @@
             var storage = new TableStorage(table, ConnectionString);
             var created = await storage.Create();
 
-            //Assert.IsTrue(created);
+            //Assert.True(created);
 
             await storage.Delete();
 
             created = await storage.Create();
-            //Assert.IsTrue(created);
+            //Assert.True(created);
 
             await storage.Delete();
         }
@@ -119,7 +120,7 @@
             await storage.Insert(entities);
 
             var returned = await storage.QueryByPartition<TableEntity>("partition");
-            Assert.IsNotNull(returned);
+            Assert.NotNull(returned);
             //Assert.AreEqual(1, returned.Count());
             var e = returned.First();
             //Assert.AreEqual(entity.PartitionKey, e.PartitionKey);
@@ -139,7 +140,7 @@
             await storage.InsertOrReplace(entity);
 
             var returned = await storage.QueryByPartition<TableEntity>("partition");
-            Assert.IsNotNull(returned);
+            Assert.NotNull(returned);
             //Assert.AreEqual(1, returned.Count());
             var e = returned.First();
             //Assert.AreEqual(entity.PartitionKey, e.PartitionKey);
@@ -165,7 +166,7 @@
             await storage.Insert(entities);
 
             var returned = await storage.QueryByPartition<TableEntity>(partition);
-            Assert.IsNotNull(returned);
+            Assert.NotNull(returned);
             //Assert.AreEqual(count, returned.Count());
         }
 
@@ -193,7 +194,7 @@
             await storage.Insert(entities);
 
             var returned = await storage.Query<TableEntity>(new TableQuery<TableEntity>());
-            Assert.IsNotNull(returned);
+            Assert.NotNull(returned);
             //Assert.AreEqual(count, returned.Count());
         }
 
@@ -218,7 +219,7 @@
             query.Where(TableQuery.GenerateFilterCondition(TableStorage.PartitionKey, QueryComparisons.Equal, partition));
             var returned = await storage.Query(query);
 
-            Assert.IsNotNull(returned);
+            Assert.NotNull(returned);
             //Assert.AreEqual(count, returned.Count());
         }
 
@@ -246,7 +247,7 @@
 
             var returned = await storage.Query(new TableQuery());
 
-            Assert.IsNotNull(returned);
+            Assert.NotNull(returned);
             //Assert.AreEqual(count, returned.Count());
         }
 
@@ -262,7 +263,7 @@
             await storage.InsertOrReplace(entity);
 
             var e = await storage.QueryByPartitionAndRow<Helper>(p, r);
-            Assert.IsNotNull(e);
+            Assert.NotNull(e);
             //Assert.AreEqual(entity[TableStorage.PartitionKey], e.PartitionKey);
             //Assert.AreEqual(entity[TableStorage.RowKey], e.RowKey);
             //Assert.AreEqual(entity["Id"], e.Id);
@@ -280,7 +281,7 @@
             await storage.InsertOrReplace(entity);
 
             var e = await storage.QueryByPartitionAndRow<Helper>(p.ToString(), r.ToString());
-            Assert.IsNotNull(e);
+            Assert.NotNull(e);
             //Assert.AreEqual(entity[TableStorage.PartitionKey].ToString(), e.PartitionKey);
             //Assert.AreEqual(entity[TableStorage.RowKey].ToString(), e.RowKey);
             //Assert.AreEqual(entity["Id"], e.Id);
@@ -295,7 +296,7 @@
             await storage.InsertOrReplace(entity);
 
             var returned = await storage.QueryByPartition<TableEntity>(p);
-            Assert.IsNotNull(returned);
+            Assert.NotNull(returned);
             //Assert.AreEqual(1, returned.Count());
             var e = returned.FirstOrDefault();
             //Assert.AreEqual(entity[TableStorage.PartitionKey], e.PartitionKey);
@@ -310,7 +311,7 @@
             await storage.InsertOrReplace(entity);
 
             var returned = await storage.QueryByRow<TableEntity>(r);
-            Assert.IsNotNull(returned);
+            Assert.NotNull(returned);
             //Assert.AreEqual(1, returned.Count());
             var e = returned.FirstOrDefault();
             //Assert.AreEqual(entity[TableStorage.RowKey], e.RowKey);
@@ -337,7 +338,7 @@
             await storage.Insert(entities);
 
             var returned = await storage.QueryByPartition<Helper>(partition);
-            Assert.IsNotNull(returned);
+            Assert.NotNull(returned);
             //Assert.AreEqual(count, returned.Count());
             foreach (var r in returned)
             {
@@ -345,7 +346,7 @@
                               where e.RowKey == r.RowKey
                               && e.Id == r.Id
                               select true).FirstOrDefault();
-                //Assert.IsTrue(exists);
+                //Assert.True(exists);
             }
         }
 
@@ -370,7 +371,7 @@
             }
 
             var returned = await storage.QueryByRow<Helper>(rowKey);
-            Assert.IsNotNull(returned);
+            Assert.NotNull(returned);
             //Assert.AreEqual(count, returned.Count());
             foreach (var r in returned)
             {
@@ -378,7 +379,7 @@
                               where e.RowKey == r.RowKey
                               && e.Id == r.Id
                               select true).FirstOrDefault();
-                //Assert.IsTrue(exists);
+                //Assert.True(exists);
             }
         }
 
@@ -411,7 +412,7 @@
             await storage.Insert(entities);
 
             var returned = await storage.QueryByPartitionAndRow<Helper>(z.PartitionKey, z.RowKey);
-            Assert.IsNotNull(returned);
+            Assert.NotNull(returned);
             //Assert.AreEqual(z.Id, returned.Id);
         }
 
@@ -437,8 +438,8 @@
             await storage.DeleteByPartition(partition);
 
             var returned = await storage.QueryByPartition<Helper>(partition);
-            Assert.IsNotNull(returned);
-            Assert.IsFalse(returned.Any());
+            Assert.NotNull(returned);
+            Assert.False(returned.Any());
         }
 
         [Fact]
@@ -461,7 +462,7 @@
             await storage.DeleteByPartitionAndRow(h.PartitionKey, h.RowKey);
 
             var returned = await storage.QueryByPartitionAndRow<Helper>(h.PartitionKey, h.RowKey);
-            Assert.IsNull(returned);
+            Assert.Null(returned);
         }
 
         [Fact]
@@ -476,10 +477,10 @@
 
             await storage.InsertOrReplace(h);
             var result = await storage.Delete(h);
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
 
             var returned = await storage.QueryByPartitionAndRow<Helper>(h.PartitionKey, h.RowKey);
-            Assert.IsNull(returned);
+            Assert.Null(returned);
         }
 
         [Fact]
@@ -508,7 +509,7 @@
             foreach (var e in entities)
             {
                 var returned = await storage.QueryByPartitionAndRow<Helper>(e.PartitionKey, e.RowKey);
-                Assert.IsNull(returned);
+                Assert.Null(returned);
             }
         }
 
@@ -541,7 +542,7 @@
 
             var returned = await storage.Query(new TableQuery());
 
-            Assert.IsNotNull(returned);
+            Assert.NotNull(returned);
             //Assert.AreEqual(0, returned.Count());
         }
 
@@ -549,30 +550,30 @@
         public async Task DeleteEntitiesNone()
         {
             var result = await storage.Delete(new List<TableEntity>());
-            Assert.IsNull(result);
+            Assert.Null(result);
         }
 
         [Fact]
         public async Task QueryByPartitionPartitionNull()
         {
             var returned = await storage.QueryByPartition<Helper>(null);
-            Assert.IsNotNull(returned);
-            Assert.IsFalse(returned.Any());
+            Assert.NotNull(returned);
+            Assert.False(returned.Any());
         }
 
         [Fact]
         public async Task QueryByRowPartitionNull()
         {
             var returned = await storage.QueryByRow<Helper>(null);
-            Assert.IsNotNull(returned);
-            Assert.IsFalse(returned.Any());
+            Assert.NotNull(returned);
+            Assert.False(returned.Any());
         }
 
         [Fact]
         public async Task QueryByPartitionAndRowPartitionNullRowNull()
         {
             var returned = await storage.QueryByPartitionAndRow<Helper>(null, null);
-            Assert.IsNull(returned);
+            Assert.Null(returned);
         }
 
         [Fact]
@@ -595,8 +596,8 @@
             await storage.DeleteByRow(rowKey);
 
             var returned = await storage.QueryByRow<Helper>(rowKey);
-            Assert.IsNotNull(returned);
-            Assert.IsFalse(returned.Any());
+            Assert.NotNull(returned);
+            Assert.False(returned.Any());
         }
 
         [Fact]
@@ -627,7 +628,7 @@
             await storage.Insert(entities);
 
             var returned = await storage.QueryByPartition<Helper>(partition);
-            Assert.IsNotNull(returned);
+            Assert.NotNull(returned);
             //Assert.AreEqual(count, returned.Count());
             foreach (var r in returned)
             {
@@ -635,7 +636,7 @@
                               where e.RowKey == r.RowKey
                               && e.Id == r.Id
                               select true).FirstOrDefault();
-                //Assert.IsTrue(exists);
+                //Assert.True(exists);
             }
         }
 
@@ -663,7 +664,7 @@
             var query = new TableQuery();
             query.Where(TableQuery.GenerateFilterCondition(TableStorage.PartitionKey, QueryComparisons.Equal, partition));
             var returned = await storage.Query(query);
-            Assert.IsNotNull(returned);
+            Assert.NotNull(returned);
             //Assert.AreEqual(count, returned.Count());
             foreach (var r in returned)
             {
@@ -671,7 +672,7 @@
                               where e.RowKey == (string)r[TableStorage.RowKey]
                               select true).FirstOrDefault();
 
-                //Assert.IsTrue(exists);
+                //Assert.True(exists);
             }
         }
 
@@ -697,7 +698,7 @@
             query.Where(TableQuery.GenerateFilterCondition(TableStorage.PartitionKey, QueryComparisons.Equal, partition));
             var returned = await storage.Query(query);
 
-            Assert.IsNotNull(returned);
+            Assert.NotNull(returned);
             //Assert.AreEqual(count, returned.Count());
             foreach (var r in returned)
             {
@@ -708,7 +709,7 @@
                                 && !string.IsNullOrWhiteSpace((string)r[TableStorage.ETag])
                                 && DateTime.UtcNow.Date == ((DateTime)r[TableStorage.Timestamp]).Date
                               select true).FirstOrDefault();
-                //Assert.IsTrue(exists);
+                //Assert.True(exists);
             }
         }
 
@@ -732,7 +733,7 @@
             
             var returned = await storage.Query<Helper>(i => i.PartitionKey == partition);
 
-            Assert.IsNotNull(returned);
+            Assert.NotNull(returned);
             //Assert.AreEqual(count, returned.Count());
             foreach (var r in returned)
             {
@@ -741,7 +742,7 @@
                                 && r.PartitionKey == (string)e[TableStorage.PartitionKey]
                               select true).FirstOrDefault();
 
-                //Assert.IsTrue(exists);
+                //Assert.True(exists);
             }
         }
 
@@ -765,7 +766,7 @@
 
             var returned = await storage.Query<Helper>(i => i.PartitionKey != partition);
 
-            Assert.IsNotNull(returned);
+            Assert.NotNull(returned);
             //Assert.AreEqual(0, returned.Count());
         }
 
@@ -788,7 +789,7 @@
             await storage.Insert(entities);
 
             var returned = await storage.QueryByPartition(partition);
-            Assert.IsNotNull(returned);
+            Assert.NotNull(returned);
             //Assert.AreEqual(count, returned.Count());
             foreach (var r in returned)
             {
@@ -796,7 +797,7 @@
                               where (string)e[TableStorage.RowKey] == (string)r[TableStorage.RowKey]
                                 && (Guid)e["Id"] == (Guid)r["Id"]
                               select true).FirstOrDefault();
-                //Assert.IsTrue(exists);
+                //Assert.True(exists);
             }
         }
 
@@ -819,7 +820,7 @@
             }
 
             var returned = await storage.QueryByRow(rowKey);
-            Assert.IsNotNull(returned);
+            Assert.NotNull(returned);
             //Assert.AreEqual(count, returned.Count());
             foreach (var r in returned)
             {
@@ -827,7 +828,7 @@
                               where (string)e[TableStorage.RowKey] == (string)r[TableStorage.RowKey]
                                 && (Guid)e["Id"] == (Guid)r["Id"]
                               select true).FirstOrDefault();
-                //Assert.IsTrue(exists);
+                //Assert.True(exists);
             }
         }
 
@@ -857,7 +858,7 @@
             await storage.Insert(entities);
 
             var returned = await storage.QueryByPartitionAndRow(partition, rowKey);
-            Assert.IsNotNull(returned);
+            Assert.NotNull(returned);
             //Assert.AreEqual(z["Id"], returned["Id"]);
         }
     }

@@ -19,13 +19,13 @@
         [Fact]
         public void IsIContainer()
         {
-            //Assert.IsNotNull(new Container("test", ConnectionString) as IContainer);
+            //Assert.NotNull(new Container("test", ConnectionString) as IContainer);
         }
 
         [Fact]
         public void IsAzureStorage()
         {
-            //Assert.IsNotNull(new Container("test", ConnectionString) as AzureStorage);
+            //Assert.NotNull(new Container("test", ConnectionString) as AzureStorage);
         }
 
         [Fact]
@@ -65,7 +65,7 @@
         {
             var name = Guid.NewGuid().ToString();
             var t = new Container(name, ConnectionString, true);
-            //Assert.IsTrue(t.IsPublic);
+            //Assert.True(t.IsPublic);
         }
 
         [Fact]
@@ -73,7 +73,7 @@
         {
             var name = Guid.NewGuid().ToString();
             var t = new Container(name, ConnectionString);
-            //Assert.IsNotNull(t.Client);
+            //Assert.NotNull(t.Client);
         }
 
         [Fact]
@@ -81,7 +81,7 @@
         {
             var name = Guid.NewGuid().ToString();
             var t = new Container(name, ConnectionString);
-            //Assert.IsNotNull(t.Reference);
+            //Assert.NotNull(t.Reference);
         }
 
         [Fact]

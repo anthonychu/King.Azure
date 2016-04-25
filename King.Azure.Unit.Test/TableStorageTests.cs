@@ -21,7 +21,7 @@
         [Fact]
         public void IsITableStorage()
         {
-            //Assert.IsNotNull(new TableStorage("TestTable", ConnectionString) as ITableStorage);
+            //Assert.NotNull(new TableStorage("TestTable", ConnectionString) as ITableStorage);
         }
 
         [Fact]
@@ -79,7 +79,7 @@
         {
             var name = Guid.NewGuid().ToString();
             var t = new TableStorage(name, ConnectionString);
-            //Assert.IsNotNull(t.Client);
+            //Assert.NotNull(t.Client);
         }
 
         [Fact]
@@ -87,7 +87,7 @@
         {
             var name = Guid.NewGuid().ToString();
             var t = new TableStorage(name, ConnectionString);
-            //Assert.IsNotNull(t.Reference);
+            //Assert.NotNull(t.Reference);
         }
 
         [Fact]

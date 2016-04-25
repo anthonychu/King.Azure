@@ -25,13 +25,13 @@
         [Fact]
         public void IsAzureStorage()
         {
-            //Assert.IsNotNull(new FileShare("test", ConnectionString) as AzureStorage);
+            //Assert.NotNull(new FileShare("test", ConnectionString) as AzureStorage);
         }
 
         [Fact]
         public void IsIFileShare()
         {
-            //Assert.IsNotNull(new FileShare("test", ConnectionString) as IFileShare);
+            //Assert.NotNull(new FileShare("test", ConnectionString) as IFileShare);
         }
 
         [Fact]
@@ -51,7 +51,7 @@
         {
             var name = Guid.NewGuid().ToString();
             var t = new FileShare(name, ConnectionString);
-            //Assert.IsNotNull(t.Client);
+            //Assert.NotNull(t.Client);
         }
 
         [Fact]
@@ -59,7 +59,7 @@
         {
             var name = Guid.NewGuid().ToString();
             var t = new FileShare(name, ConnectionString);
-            //Assert.IsNotNull(t.Reference);
+            //Assert.NotNull(t.Reference);
         }
 
         [Fact]

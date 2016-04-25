@@ -19,7 +19,7 @@
         [Fact]
         public void IQueue()
         {
-            //Assert.IsNotNull(new StorageQueue("test", ConnectionString) as IStorageQueue);
+            //Assert.NotNull(new StorageQueue("test", ConnectionString) as IStorageQueue);
         }
 
         [Fact]
@@ -53,7 +53,7 @@
         {
             var name = Guid.NewGuid().ToString();
             var t = new StorageQueue(name, ConnectionString);
-            //Assert.IsNotNull(t.Client);
+            //Assert.NotNull(t.Client);
         }
 
         [Fact]
@@ -61,7 +61,7 @@
         {
             var name = Guid.NewGuid().ToString();
             var t = new StorageQueue(name, ConnectionString);
-            //Assert.IsNotNull(t.Reference);
+            //Assert.NotNull(t.Reference);
         }
 
         [Fact]

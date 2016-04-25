@@ -16,13 +16,13 @@
         [Fact]
         public void IsIAzureStorageResources()
         {
-            //Assert.IsNotNull(new AzureStorageResources(ConnectionString) as IAzureStorageResources);
+            //Assert.NotNull(new AzureStorageResources(ConnectionString) as IAzureStorageResources);
         }
 
         [Fact]
         public void IsAzureStorage()
         {
-            //Assert.IsNotNull(new AzureStorageResources(ConnectionString) as AzureStorage);
+            //Assert.NotNull(new AzureStorageResources(ConnectionString) as AzureStorage);
         }
     }
 }

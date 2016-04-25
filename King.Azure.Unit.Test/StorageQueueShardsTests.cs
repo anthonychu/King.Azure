@@ -52,13 +52,13 @@
         [Fact]
         public void IsIQueueShardSender()
         {
-            //Assert.IsNotNull(new StorageQueueShards("test", ConnectionString) as IQueueShardSender<IStorageQueue>);
+            //Assert.NotNull(new StorageQueueShards("test", ConnectionString) as IQueueShardSender<IStorageQueue>);
         }
 
         [Fact]
         public void IsIAzureStorage()
         {
-            //Assert.IsNotNull(new StorageQueueShards("test", ConnectionString) as IAzureStorage);
+            //Assert.NotNull(new StorageQueueShards("test", ConnectionString) as IAzureStorage);
         }
 
         [Fact]
@@ -77,7 +77,7 @@
             var i = (byte)random.Next(1, byte.MaxValue);
             var sqs = new StorageQueueShards("test", ConnectionString, i);
 
-            //Assert.IsNotNull(sqs.Queues);
+            //Assert.NotNull(sqs.Queues);
             //Assert.AreEqual(i, sqs.Queues.Count());
         }
 
@@ -96,7 +96,7 @@
             var sqs = new StorageQueueShards(qs.ToArray());
 
             var success = await sqs.CreateIfNotExists();
-            //Assert.IsTrue(success);
+            //Assert.True(success);
 
             foreach (var q in qs)
             {
@@ -175,7 +175,7 @@
 
             var index = sqs.Index(0);
 
-            //Assert.IsTrue(0 <= index && 3 > index);
+            //Assert.True(0 <= index && 3 > index);
         }
         
         //[Fact]

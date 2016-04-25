@@ -18,7 +18,7 @@
         [Fact]
         public void IsIStorageAccount()
         {
-            //Assert.IsNotNull(new AzureStorage(ConnectionString) as IStorageAccount);
+            //Assert.NotNull(new AzureStorage(ConnectionString) as IStorageAccount);
         }
 
         [Fact]

@@ -78,7 +78,7 @@
             //var sqm = new StorageQueuedMessage<Helper>(queue, message);
             //var data = await sqm.Data();
 
-            //Assert.IsNotNull(data);
+            //Assert.NotNull(data);
             //Assert.AreEqual(expected.Test, data.Test);
         }
     }
